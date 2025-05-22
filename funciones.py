@@ -62,14 +62,19 @@ def mostrarAgenda():
 
 #Buscador de contactos
 def buscarContacto():
-    nombre = input("El nombre es: ")
+    nombre = input("Introduce el nombre a buscar o patron a buscar: ").lower()
+    encontrado = False
 
     with open("agendaContactos.txt", "r") as agenda:
-        linea = agenda.readlines()
-        for row in linea:
-            palabra = nombre
-            if row.find(palabra) != -1:
-                print(f"El contacto {palabra} existe")
+        lineas = agenda.readlines()
+        for linea in lineas:
+            if nombre in linea.lower():
+                print("Datos del contacto encontrado:")
+                print(linea.strip())
+                encontrado = True
+
+    if not encontrado:
+        print("No se encontró ningún contacto con ese nombre.")
 
 
 #Editor de contactos
