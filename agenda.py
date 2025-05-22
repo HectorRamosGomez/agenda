@@ -5,7 +5,7 @@ import funciones
 print(funciones.menuAgendaContactos())
 opcion = int(input("> "))
 
-while opcion != 11:
+while opcion != 10:
     match opcion:
         case 1: 
             funciones.crearAgenda()

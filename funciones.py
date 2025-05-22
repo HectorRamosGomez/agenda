@@ -1,5 +1,7 @@
 #Funciones de la agenda
 
+import re
+
 def menuAgendaContactos():
     print("Agenda ")
     print("(1). Crea una agenda. ")
@@ -25,6 +27,10 @@ def agregarContacto () :
     correo = input("Introduce tu correo: ")
     nombre = nombre
 
+    if not validarDatos(correo):
+        print("Datos inválidos. Intenta nuevamente.")
+        return
+    
     contacto_encontrado = False
 
     with open("agendaContactos.txt", "r") as agenda:
@@ -134,9 +140,9 @@ def ordenarArchivo():
 #importar datos
 def importarArchivos():
     importFile = input("Introduce el nombre del archivo a importar: ")
-    with open(importFile,'r') as firstfile, open('agendaContactos.txt','a') as secondfile:
-        for line in firstfile:
-             secondfile.write(line)
+    with open(importFile,'r') as primerArchivo, open('agendaContactos.txt','a') as segundoArchivo:
+        for line in primerArchivo:
+             segundoArchivo.write(line)
 
 #Exportar datos
 def exportarArchivos () :
@@ -144,8 +150,16 @@ def exportarArchivos () :
     agenda = open (exportFile, "w")
     agenda.close()
 
-    with open("agendaContactos.txt",'r') as firstfile, open(exportFile,'w') as secondfile:
-        for line in firstfile:
-            secondfile.write(line)
+    with open("agendaContactos.txt",'r') as primerArchivo, open(exportFile,'w') as segundoArchivo:
+        for line in primerArchivo:
+            segundoArchivo.write(line)
 
 #Validar datos
+def validarDatos(correo):
+    patron_correo = r'^[\w\.-]+@[\w\.-]+\.\w{2,4}$'
+    if not re.match(patron_correo, correo):
+        print("Correo no válido.")
+        return False
+    
+    return True
+
