@@ -25,7 +25,6 @@ def agregarContacto () :
     nombre = input("Introduce tu nombre: ")
     telefono = input("Introudce tu telfono: ")
     correo = input("Introduce tu correo: ")
-    nombre = nombre
 
     if not validarDatos(correo):
         print("Datos inválidos. Intenta nuevamente.")
@@ -117,7 +116,7 @@ def borrarContactos():
                 agenda.write(linea)
             else:
                 contacto_encontrado = True
-
+    
     if contacto_encontrado:
         print("El contacto ha sido eliminado.")
     else:
@@ -149,7 +148,7 @@ def importarArchivos():
         for line in primerArchivo:
              segundoArchivo.write(line)
 
-#Exportar datos
+#Función para poder exportar datos
 def exportarArchivos () :
     exportFile = input("Introduce el nombre del archivo que quieres crear para exportar: ")
     agenda = open (exportFile, "w")
@@ -159,7 +158,7 @@ def exportarArchivos () :
         for line in primerArchivo:
             segundoArchivo.write(line)
 
-#Validar datos
+#Función para poder validar datos
 def validarDatos(correo):
     patron_correo = r'^[\w\.-]+@[\w\.-]+\.\w{2,4}$'
     if not re.match(patron_correo, correo):
